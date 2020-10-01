@@ -1,0 +1,58 @@
+Пока нет серверов БД, создан фейковый REST API сервис для тестовых целей.
+К сожалению, он не позволяет создать вточь API который нужен, поэтому ниже будут ссылки как на фековый API? так и на "как будет на будущем сервере"
+
+1. При GET http запросе на "https://my-json-server.typicode.com/kunAndrew/cookstarter/restaurants" будет возвращен JSON:
+1.* Должно быть: "<ServerApiAddress>/restaurants", где ServerApiAddress - адресс сервера БД предположительно на Heroku.
+
+Пример: "https://my-json-server.typicode.com/kunAndrew/cookstarter/restaurants"
+[
+    {
+        "id": 1,
+        "name": "PizzaHut"
+    },
+    {
+        "id": 2,
+        "name": "Vkusnyesushi"
+    },
+    {
+        "id": 3,
+        "name": "Mcdonalds"
+    }
+]
+
+2. Get запрос на "https://my-json-server.typicode.com/kunAndrew/cookstarter/restaurant/<RestaurantName>"
+2.* Будет на сервере "<ServerApiAddress>/restaurants/<RestaurantName>"
+
+Пример: "https://my-json-server.typicode.com/kunAndrew/cookstarter/restaurant/PizzaHut"
+
+{
+    "id": "PizzaHut",
+    "description": "Pizza Hut — сеть ресторанов."
+}
+
+3. Доспуп к меню. Get запрос на "https://my-json-server.typicode.com/kunAndrew/cookstarter/<MenuRestaurant>"
+3.* Будет на сервере "<ServerApiAddress>/restaurants/<RestaurantName>/menu"
+
+Пример: "https://my-json-server.typicode.com/kunAndrew/cookstarter/menuPizzaHut"
+
+[
+    {
+        "id": 1,
+        "name": "Маргарита",
+        "prize": 100
+    },
+    {
+        "id": 2,
+        "name": "Пепперони",
+        "prize": 150
+    },
+    {
+        "id": 3,
+        "name": "Маргарита",
+        "prize": 200
+    }
+]
+Доступны три набора меню:
+"https://my-json-server.typicode.com/kunAndrew/cookstarter/menuPizzaHut"
+"https://my-json-server.typicode.com/kunAndrew/cookstarter/menuVkusnyesushi"
+"https://my-json-server.typicode.com/kunAndrew/cookstarter/menuMcdonalds"
