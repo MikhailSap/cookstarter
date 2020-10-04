@@ -39,9 +39,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/api/v1/login/**").permitAll() // доступ всем
-                .antMatchers("/api/v1/**").authenticated() // доступ любому авторизированному клиенту
-                .antMatchers("/api/v1/restaurant/**").hasAnyRole("USER") // доступ конкретному авторизированному через роль
+//                .antMatchers("/api/v1/login/**").permitAll() // доступ всем
+//                .antMatchers("/api/v1/**").authenticated() // доступ любому авторизированному клиенту
+//                .antMatchers("/api/v1/restaurant/**").hasAnyRole("USER") // доступ конкретному авторизированному через роль
                 .anyRequest().permitAll() // доступ всем
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

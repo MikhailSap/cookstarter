@@ -8,7 +8,7 @@ app.controller('loginControllerApiV1', function ($log, $scope, $window, $http, $
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
                     //$log.info("birer:" , response.data.token);
                     $localStorage.currentUser = {username: $scope.user.username, token: response.data.token};
-                    // $window.location.href = '#!/';
+                    $window.location.href = '#!/';
                 }
             });
     };

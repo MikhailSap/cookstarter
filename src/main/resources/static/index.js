@@ -5,6 +5,26 @@ const contextPath = 'http://localhost:8189/cookstarter'
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
+            templateUrl: 'welcome.html'
+        })
+        .when('/login', {
+            templateUrl: 'login.html',
+            controller: 'loginControllerApiV1'
+        })
+        .when('/customer', {
+            templateUrl: 'customer.html',
+            controller: 'customerControllerApiV1'
+        })
+        .when('/customer', {
+            templateUrl: 'customer.html',
+            controller: 'customerControllerApiV1'
+        })
+        .otherwise({template: '<h1>404 Error (роутинг провайденр не нашел такой путь)</h1>'})
+});
+
+app.config(function ($routeProvider) {
+    $routeProvider
+        .when('/', {
             templateUrl: 'welcome/welcome.html'
         })
         .when('/login', {

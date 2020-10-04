@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>store</groupId>
-    <artifactId>cookstarter</artifactId>
+    <artifactId>22_GB_Cookstarter</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cookstarter</name>
-    <description>cookstarter</description>
+    <name>22_GB_Cookstarter</name>
+    <description>22_GB_Cookstarter</description>
 
     <properties>
         <java.version>1.8</java.version>
