@@ -15,10 +15,6 @@
     <description>Cookstarter</description>
     <packaging>pom</packaging>
 
-    <modules>
-        <module>customer-service</module>
-    </modules>
-
     <properties>
         <java.version>11</java.version>
         <lombok.version>1.18.12</lombok.version>
@@ -27,6 +23,7 @@
 
     <modules>
         <module>picture-service</module>
+        <module>customer-service</module>
     </modules>
 
     <dependencies>
