@@ -161,7 +161,7 @@ GET /orders/get/customer/{id}
 ---
 **Получить все заказы по ресторану**
 
-GET /orders/get/restaurant/{id}
+GET /orders/get/user/{id}
 
 ответ
 ```json5
