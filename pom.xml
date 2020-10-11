@@ -21,12 +21,7 @@
         <postgresql.version>42.2.14</postgresql.version>
     </properties>
 
-    <modules>
-        <module>customer-service</module>
-        <module>picture-service</module>
-    </modules>
-
-    <dependencies>
+   <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
