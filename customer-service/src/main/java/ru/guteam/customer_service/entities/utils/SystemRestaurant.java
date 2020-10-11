@@ -19,7 +19,6 @@ public class SystemRestaurant {
     @NotNull
     private String password;
     @NotNull
-    private Role role;
-
+    private String role;
 
 }

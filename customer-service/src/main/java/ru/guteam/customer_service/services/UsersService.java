@@ -1,6 +1,7 @@
 package ru.guteam.customer_service.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,17 +13,20 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.customer_service.entities.Customer;
 import ru.guteam.customer_service.entities.User;
 import ru.guteam.customer_service.entities.Role;
+import ru.guteam.customer_service.entities.utils.SystemCustomer;
 import ru.guteam.customer_service.entities.utils.SystemRestaurant;
-import ru.guteam.customer_service.repositories.UserRepository;
+import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
+import ru.guteam.customer_service.repositories.UsersRepository;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class UsersService implements UserDetailsService {
-    private UserRepository userRepository;
+    private UsersRepository usersRepository;
     private RolesService rolesService;
     private PasswordEncoder passwordEncoder;
 
@@ -32,8 +36,8 @@ public class UsersService implements UserDetailsService {
     }
 
     @Autowired
-    public void setUsersRepository(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void setUsersRepository(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 
     @Autowired
@@ -54,31 +58,39 @@ public class UsersService implements UserDetailsService {
     }
 
     public User findByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findOneByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Невозможно найти пользователя по логину = " + username));
+        return usersRepository.findOneByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Невозможно найти пользователя по логину = " + username));
     }
 
     public Optional<User> findOptionalByUsername(String username) {
-        return userRepository.findOneByUsername(username);
-    }
-
-
-    public User saveOrUpdate(User user) {
-        return userRepository.save(user);
+        return usersRepository.findOneByUsername(username);
     }
 
     @Transactional
-    public User save(SystemRestaurant systemRestaurant) {
+    public User saveRestaurant(SystemRestaurant systemRestaurant) {
         User user = new User();
         Customer customer = new Customer();
         customer.setId(systemRestaurant.getRestaurantId());
+        user.setUserType(UsersTypeEnum.RESTAURANT);
         user.setCustomer(customer);
+        user.setUsername(systemRestaurant.getUsername());
         user.setPassword(passwordEncoder.encode(systemRestaurant.getPassword()));
-        user.setFirstName(systemRestaurant.getFirstName());
-        user.setLastName(systemRestaurant.getLastName());
-        user.setEmail(systemRestaurant.getEmail());
+        user.setRole(rolesService.findByName(systemRestaurant.getRole()));
         user.setEnable(true);
-        user.setRoles(Arrays.asList(rolesService.findByName("ROLE_CUSTOMER")));
         return usersRepository.save(user);
+    }
+
+    public User createBySystemCustomer(SystemCustomer systemCustomer) {
+        User user = new User();
+        user.setUserType(UsersTypeEnum.CUSTOMER);
+        user.setUsername(systemCustomer.getUsername());
+        user.setPassword(passwordEncoder.encode(systemCustomer.getPassword()));
+        user.setRole(rolesService.findByName("CUSTOMER"));
+        user.setEnable(true);
+        return user;
+    }
+
+    public boolean existsByUsername(String username) {
+        return usersRepository.existsByUsername(username);
     }
 
 }

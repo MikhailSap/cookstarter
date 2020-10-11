@@ -3,6 +3,7 @@ package ru.guteam.customer_service.entities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -18,6 +19,7 @@ public class Customer {
     @Column(name = "id")
     private Long id;
 
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     @OneToOne(mappedBy = "customer")
     private User user;
 

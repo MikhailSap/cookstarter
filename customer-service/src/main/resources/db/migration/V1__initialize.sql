@@ -20,7 +20,7 @@ drop table if exists users.users;
 create table users.users (
 id                    bigserial,
 user_type             varchar(10) not null,
-user_id               bigint not null UNIQUE,
+user_id               bigint not null,
 username              varchar(30) not null UNIQUE,
 password              varchar(80) not null,
 role_id               int not null,

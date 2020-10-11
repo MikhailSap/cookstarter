@@ -14,6 +14,7 @@ import ru.guteam.customer_service.controllers.utils.JwtTokenUtil;
 import ru.guteam.customer_service.services.UsersService;
 
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/auth")
 @AllArgsConstructor
@@ -33,17 +34,5 @@ public class AuthController {
         String token = jwtTokenUtil.generateToken(userDetails);
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
-
-//    @PostMapping(value = "/rest", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> createRestaurantAuthToken(@RequestBody UsernameAndPasswordRequest authRequest) {
-//        try {
-//            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-//        } catch (BadCredentialsException e) {
-//            return new ResponseEntity<>("Неверные логин или пароль", HttpStatus.UNAUTHORIZED);
-//        }
-//        UserDetails userDetails = restaurantsService.loadUserByUsername(authRequest.getUsername());
-//        String token = jwtTokenUtil.generateToken(userDetails);
-//        return new ResponseEntity<>(token, HttpStatus.OK);
-//    }
 
 }

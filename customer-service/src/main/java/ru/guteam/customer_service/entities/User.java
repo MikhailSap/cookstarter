@@ -3,10 +3,9 @@ package ru.guteam.customer_service.entities;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import ru.guteam.customer_service.entities.utils.UsersType;
+import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Data
@@ -21,7 +20,7 @@ public class User {
     private Long id;
 
     @Column(name = "user_type")
-    private UsersType userType;
+    private UsersTypeEnum userType;
 
     @OneToOne
     @JoinColumn(name = "user_id")

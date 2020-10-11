@@ -14,8 +14,8 @@ import ru.guteam.customer_service.services.UsersService;
 
 import java.util.Optional;
 
-@RestController
 @CrossOrigin("*")
+@RestController
 @RequestMapping("/check")
 @AllArgsConstructor
 public class JwtCheckController {
