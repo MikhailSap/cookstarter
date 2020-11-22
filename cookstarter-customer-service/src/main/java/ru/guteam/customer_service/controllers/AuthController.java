@@ -14,10 +14,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.guteam.customer_service.controllers.utils.JwtTokenUtil;
-import ru.guteam.customer_service.controllers.utils.TokenResponse;
-import ru.guteam.customer_service.controllers.utils.TokenRequest;
+import ru.guteam.customer_service.entities.utils.TokenResponse;
+import ru.guteam.customer_service.entities.utils.TokenRequest;
 import ru.guteam.customer_service.entities.User;
-import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
 import ru.guteam.customer_service.services.UsersService;
 
 @Slf4j
@@ -31,7 +30,7 @@ public class AuthController {
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
-    @ApiOperation("Returns JWT Token for the user by his username and password inside an object of TokenRequest type.")
+    @ApiOperation("Returns JWT Token for the user by his username, password and email inside an object of TokenRequest type.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAuthToken(@RequestBody @ApiParam("Cannot be empty") TokenRequest authRequest) {
         try {
@@ -42,7 +41,7 @@ public class AuthController {
         UserDetails userDetails = usersService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
         User user = usersService.findByUsername(authRequest.getUsername());
-        return new ResponseEntity<>(new TokenResponse(token, user.getCustomer().getId()), HttpStatus.OK);
+        return new ResponseEntity<>(new TokenResponse(token, user.getId(), user.getRestaurantId()), HttpStatus.OK);
     }
 
 }

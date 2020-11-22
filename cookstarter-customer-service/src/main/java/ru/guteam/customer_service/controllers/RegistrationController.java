@@ -14,10 +14,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import ru.guteam.customer_service.entities.utils.SystemCustomer;
-import ru.guteam.customer_service.entities.utils.SystemRestaurant;
+import ru.guteam.customer_service.entities.User;
+import ru.guteam.customer_service.entities.utils.RegistrationResponse;
+import ru.guteam.customer_service.entities.utils.SystemUser;
 import ru.guteam.customer_service.entities.utils.validation.ValidationErrorDTO;
-import ru.guteam.customer_service.services.CustomersService;
+import ru.guteam.customer_service.services.UsersInfoService;
 import ru.guteam.customer_service.services.UsersService;
 
 import javax.validation.Valid;
@@ -31,7 +32,7 @@ import java.util.List;
 @Api("Set of endpoints for registration")
 public class RegistrationController {
     private final UsersService usersService;
-    private final CustomersService customersService;
+    private final UsersInfoService usersInfoService;
 
 
     @InitBinder
@@ -40,30 +41,16 @@ public class RegistrationController {
         dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
     }
 
-    @ApiOperation("Returns HttpStatus of trying registration procedure for restaurants. Inside the object of SystemRestaurant type is data about it.")
-    @PostMapping(value = "/restaurant", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> restaurantRegistration(@RequestBody @ApiParam("Cannot be empty") @Valid SystemRestaurant systemRestaurant) {
-        String username = systemRestaurant.getUsername();
+    @ApiOperation("Returns HttpStatus and user's id of trying registration procedure for users. Inside the object of SystemUser type is data about them.")
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> customerRegistration(@RequestBody @ApiParam("Cannot be empty") @Valid SystemUser systemUser) {
+        String username = systemUser.getUsername();
         if (usersService.existsByUsername(username)) {
-            return new ResponseEntity<>("Ресторан с логином: " + username + " уже существует", HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Пользователь с логином: " + username + " уже существует", HttpStatus.CONFLICT);
         }
-        usersService.saveRestaurant(systemRestaurant);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @ApiOperation("Returns HttpStatus of trying registration procedure for customers. Inside the object of SystemCustomer type is data about it.")
-    @PostMapping(value = "/customer", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> customerRegistration(@RequestBody @ApiParam("Cannot be empty") @Valid SystemCustomer systemCustomer) {
-        String username = systemCustomer.getUsername();
-        if (usersService.existsByUsername(username)) {
-            return new ResponseEntity<>("Клиент с логином: " + username + " уже существует", HttpStatus.CONFLICT);
-        }
-        String email = systemCustomer.getEmail();
-        if (customersService.existsByEmail(email)) {
-            return new ResponseEntity<>("Клиент с адресом: " + email + " уже существует", HttpStatus.CONFLICT);
-        }
-        customersService.saveBySystemCustomer(systemCustomer);
-        return new ResponseEntity<>(HttpStatus.OK);
+        usersInfoService.saveBySystemUser(systemUser);
+        User user = usersService.findByUsername(username);
+        return new ResponseEntity<>(new RegistrationResponse(user.getId()), HttpStatus.OK);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

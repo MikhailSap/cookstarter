@@ -1,4 +1,4 @@
-package ru.guteam.customer_service.controllers.utils;
+package ru.guteam.customer_service.entities.utils;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,3 +20,4 @@ public class TokenRequest {
     @ApiModelProperty(notes = "User's password", example = "1000", required = true, position = 2)
     private String password;
 }
+

@@ -9,8 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import ru.guteam.customer_service.controllers.utils.TokenResponse;
-import ru.guteam.customer_service.controllers.utils.TokenRequest;
+import ru.guteam.customer_service.entities.utils.TokenResponse;
+import ru.guteam.customer_service.entities.utils.TokenRequest;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
