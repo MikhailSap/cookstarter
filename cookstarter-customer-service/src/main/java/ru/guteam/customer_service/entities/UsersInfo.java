@@ -12,15 +12,15 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @ToString
-@Table(name = "customers")
-public class Customer {
+@Table(name = "users_info")
+public class  UsersInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
-    @OneToOne(mappedBy = "customer")
+    @OneToOne(mappedBy = "usersInfo")
     private User user;
 
     @Column(name = "first_name")
@@ -33,3 +33,4 @@ public class Customer {
     private String email;
 
 }
+

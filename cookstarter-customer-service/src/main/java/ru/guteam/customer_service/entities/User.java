@@ -2,7 +2,6 @@ package ru.guteam.customer_service.entities;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
 
 import javax.persistence.*;
@@ -18,12 +17,12 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_type")
-    private UsersTypeEnum userType;
+    @Column(name = "restaurant_id")
+    private Long restaurantId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private Customer customer;
+    @JoinColumn(name = "info_id")
+    private UsersInfo usersInfo;
 
     @Column(name = "username")
     private String username;

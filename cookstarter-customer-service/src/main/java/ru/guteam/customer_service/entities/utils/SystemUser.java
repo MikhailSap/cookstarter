@@ -10,11 +10,11 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-@ApiModel(description = "Class representing data about customer for his registration in the application.")
-public class SystemCustomer {
+@ApiModel(description = "Class representing data about users for his registration in the application.")
+public class SystemUser {
 
     @NotNull(message = "This field is required")
-    @ApiModelProperty(notes = "User's phone number", example = "89110002211", required = true, position = 1)
+    @ApiModelProperty(notes = "User's login", example = "100", required = true, position = 1)
     private String username;
 
     @NotNull(message = "This field is required")
@@ -32,4 +32,6 @@ public class SystemCustomer {
     @NotNull(message = "This field is required")
     @ApiModelProperty(notes = "User's email", example = "ivan@mail.ru", required = true, position = 5)
     private String email;
+
 }
+
