@@ -39,6 +39,7 @@
 
 1. Пользовательское веб приложение.
 ```
+https://cookstarterapp.herokuapp.com
 ```
 
 2. Пользовательское Android приложение.
@@ -48,6 +49,7 @@ https://play.google.com/store/apps/details?id=ru.anatomica.cookstarter
 
 3. Веб приложение для рестарана.
 ```
+https://cookstarter-restaurant-cabinet.herokuapp.com
 ```
 
 4. Сервис для регистрации и аунтентификации пользователей.
