@@ -72,7 +72,7 @@ https://cs-order-service.herokuapp.com
 
 API сервисов:
 ```
-service_path/swagger-ui.html
+service_link/swagger-ui.html
 ```
 
 Общий файл с API:
